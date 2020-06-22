@@ -526,12 +526,12 @@ RUN \
 FROM        python:3.6-slim AS release
 MAINTAINER  Julien Rottenberg <julien@rottenberg.info>
 
-ENV         LD_LIBRARY_PATH=/:/tmp/fakeroot/lib:/usr/local/lib:/usr/local/lib64:/usr/lib:/usr/lib64:/lib:/lib64
+ENV         LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64:/usr/lib:/usr/lib64:/lib:/lib64
 
 CMD         ["--help"]
-ENTRYPOINT  ["/bin/ffmpeg"]
+ENTRYPOINT  ["/usr/local/bin/ffmpeg"]
 
-COPY --from=build /tmp/fakeroot/ /
+COPY --from=build /tmp/fakeroot/ /usr/local/
 
 # Let's make sure the app built correctly
 # Convenient to verify on https://hub.docker.com/r/jrottenberg/ffmpeg/builds/ console output
